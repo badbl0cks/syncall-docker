@@ -7,7 +7,7 @@ ENV TASKRC="/.taskrc"
 ENV TASKDATA="/.task"
 ENV TZ=America/Los_Angeles
 
-RUN apk --no-cache add build-base
+RUN apk --no-cache add build-base bash
 
 RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ task3
 
@@ -20,8 +20,8 @@ VOLUME [ "/.task", "/.taskrc", "/root/.gtasks_credentials.pickle" ]
 RUN touch /var/log/cron.log
 
 RUN touch crontab.tmp \
-    && echo '*/5 * * * * /sync.sh" >> /var/log/cron.log' > crontab.tmp \
+    && echo '*/5 * * * * /bin/bash /sync.sh" >> /var/log/cron.log' > crontab.tmp \
     && crontab crontab.tmp \
     && rm -rf crontab.tmp
 
-CMD (/sync.sh || true) && (/usr/sbin/crond -f -d 0 &) && (tail -f /var/log/cron.log)
+CMD (/bin/bash /sync.sh || true) && (/usr/sbin/crond -f -d 0 &) && (tail -f /var/log/cron.log)

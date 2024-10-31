@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Capture the output of the task command into a variable
 projects=$(task +PENDING _unique project)
