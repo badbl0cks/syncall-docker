@@ -1,0 +1,13 @@
+services:
+  syncall-docker:
+    tty: true
+    container_name: "tasks-syncall"
+    image: "badbl0cks/syncall-docker"
+    build:
+      # If portainer (agent) fails to build due to HTTP error, just copy into docker-compose.yml file on portainer agent host and build once there, then update this stack
+      context: .
+    volumes:
+      - "/srv/docker/tasks/.gtasks_credentials.pickle:/root/.gtasks_credentials.pickle" #pass in existing credentials (logging in doesnt work with docker)
+      - "/srv/docker/tasks/.task:/.task"
+      - "/srv/docker/tasks/.taskrc:/.taskrc"
+      - "/dev/log:/dev/log" #prevent logging errors
