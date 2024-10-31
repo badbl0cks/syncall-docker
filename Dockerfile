@@ -20,7 +20,7 @@ VOLUME [ "/.task", "/.taskrc", "/root/.gtasks_credentials.pickle" ]
 RUN touch /var/log/cron.log
 
 RUN touch crontab.tmp \
-    && echo '*/5 * * * * /bin/bash /sync.sh" >> /var/log/cron.log' > crontab.tmp \
+    && echo '*/5 * * * * "/bin/bash /sync.sh" >> /var/log/cron.log' > crontab.tmp \
     && crontab crontab.tmp \
     && rm -rf crontab.tmp
 
