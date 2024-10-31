@@ -15,7 +15,7 @@ RUN apk add --update --no-cache --repository http://dl-cdn.alpinelinux.org/alpin
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Taskwarrior data volume
-VOLUME [ "/.task", "/.taskrc" ]
+VOLUME [ "/.task", "/.taskrc", "/root/.gtasks_credentials.pickle" ]
 
 RUN touch /var/log/cron.log
 
